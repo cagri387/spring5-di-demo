@@ -5,36 +5,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
-/**
- * Created by jt on 6/7/17.
- */
 @Configuration
 @PropertySource("classpath:datasource.properties")
 public class PropertyConfig {
 
     @Value("${guru.username}")
-    String user;
+    private String username;
 
     @Value("${guru.password}")
-    String password;
+    private String passwrod;
 
-    @Value("${guru.dburl}")
-    String url;
+    @Value("${guru.url}")
+    private String url;
 
     @Bean
-    public FakeDataSource fakeDataSource(){
+    public FakeDataSource fakeDataSource() {
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUser(user);
-        fakeDataSource.setPassword(password);
+        fakeDataSource.setUser(username);
+        fakeDataSource.setPassword(passwrod);
         fakeDataSource.setUrl(url);
         return fakeDataSource;
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer properties(){
-        PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer =new PropertySourcesPlaceholderConfigurer();
-        return  propertySourcesPlaceholderConfigurer;
     }
 }
